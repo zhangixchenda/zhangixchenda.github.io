@@ -1,0 +1,538 @@
+
+
+
+<head>
+  <link rel="stylesheet" href="介面調整.css">
+  <script src="關卡1-.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<style>
+body {
+    background-color:rgb(250, 251, 249);
+    width: 100%;
+    height:100%;
+    display: flex;
+   }
+
+   .wid{
+    width:  80%;
+    height: 50%;
+    background-color: rgb(255, 255, 254);
+    border: 3px solid rgb(168, 160, 160);
+    border-radius: 15px 15px 15px 15px;
+margin-left: 1%;
+
+   }
+
+button{
+    color:aliceblue;
+
+  background-color:rgb(26, 57, 119);
+  
+  border:3px solid rgb(130, 128, 128);
+  
+  color:white;
+  
+  padding:10px 20px 10px 20px;
+  
+  border-radius:10px 10px 10px 10px;   
+
+  margin: 3px;
+ 
+}
+
+button:active{
+
+    color:aliceblue;
+
+    background-color:rgb(108, 135, 189);
+    
+    border:3px solid rgb(130, 128, 128);
+    
+    color:white;
+    
+    padding:10px 20px 10px 20px;
+    
+    display: inline-flex;
+    
+    text-align:center;
+  
+    border-radius:10px 10px 10px 10px;
+
+
+}
+
+.summary{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    height: 150%;
+    height: 150px;
+    display: flexbox;
+    margin-top: 30px;
+}
+    .HP{
+        color: #f7f5f4; 
+        border: 10px rgb(215, 205, 205) solid;
+         border-radius: 30px;
+         background-color: red;
+         width: 20%;
+         text-align: center;
+         margin-left: 2%;
+    }
+    .MP{
+        color: #fcfdfd;
+        border: 10px rgb(215, 205, 205) solid;
+        border-radius: 30px;
+        background-color: rgb(59, 132, 227);
+        width: 20%;
+        margin-left: 2%;
+    }
+
+
+.monster{
+    .blood{
+        height: 20px;
+        background-color: #FF0000;
+        width: 70%;
+        border-radius: 200px;
+        border: rgb(192, 185, 176) 5px solid;
+        color: white;
+        
+    }
+}
+
+.monstermp{
+    height: 20px;
+    background-color: #255e97;
+    width: 70%;
+    border-radius: 200px;
+    border: rgb(192, 185, 176) 5px solid;
+    color: white;
+    
+
+}
+
+img
+{
+border: rebeccapurple 5px solid;
+border-radius: 30px;
+  
+}
+
+.uspic
+{
+    width: 90px;
+    height:90px;
+}
+
+.myhero{
+    float: left;
+    margin-left: 3%;
+}
+
+.scrollen{
+    overflow: scroll;
+}
+
+.data{
+    width:  100%;
+    height: 100%;
+    height: 600px;
+    background-color: rgb(255, 255, 254);
+    border: 3px solid rgb(168, 160, 160);
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 1%;
+    margin-right: 3%;
+  overflow: scroll;
+  text-align: center;
+}
+
+flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.about{
+    background-color:gray;
+    color: white;
+}</style>
+
+  <script>
+
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    var hero = [
+        the1 = {
+            name:"小龍怪",
+            hp: [150, 150], // HP(血量): 現在剩餘/總量
+            mp: [200, 200], // MP(法力): 現在剩餘/總量
+            def: [50,50], // 防禦力，決定被攻擊後會損多少血
+            atk: [20,20],
+            Moves: ["爆烈火球","龍息爆氣","炎龍爆"]
+                },
+
+        the2 = {
+            name:"貓甲兵",
+            hp: [190, 190], // HP(血量): 現在剩餘/總量
+            mp: [200, 200], // MP(法力): 現在剩餘/總量
+            def:[20,20], // 防禦力，決定被攻擊後會損多少血
+            atk:[30,30],
+            Moves: [ "瘋狂亂抓","爪傷"],
+        }
+
+    ]
+
+        
+            
+            
+            
+            
+
+    console.log = (...e) => {
+
+        for (var i = 0; i < e.length; i++) {
+        log.innerHTML += (typeof(e[i]) == "object" ? JSON.stringify(e[i]) : e[i]) + "<br/>";
+        
+        }
+        };          
+          
+  
+   var mo_me =  0;
+  
+   var mo_he = 1;
+  
+   var playerHP = hero[mo_me].hp[1];
+  
+   var currentHP = hero[mo_he].hp[1];
+  
+   var theusmp =  hero[mo_me].mp[1];
+  
+   var thehemp = hero[mo_he].mp[1];
+  
+   // 更新敵我方hp現在值
+  
+  
+  var ushper= document.getElementById("playerHP");
+  
+  function ushpnow(){
+      ushper.textContent = playerHP;
+  }
+  
+  var hehper = document.getElementById("currentHP");
+  
+  function hehpnow() {
+  hehper.textContent = currentHP;
+  
+  }
+  
+  
+  // 更新敵我方mp現在值
+  
+  var usmper= document.getElementById("usmpz");
+  
+  function usmpnow(){
+      usmper.textContent = theusmp;
+  }
+  
+  var hemper= document.getElementById("hempz");
+  
+  function hempnow(){
+      hemper.textContent = thehemp;
+  }
+    
+  
+  
+  var heelement = document.getElementById("hedata");
+  
+  // 敵方精靈資料
+  var hehp = hero[mo_he].hp[0];
+  var hemp=  hero[mo_he].mp[0];
+  var hedef =  hero[mo_he].def[0];
+  var heatk =  hero[mo_he].atk[0];
+  
+  heelement.textContent = "血量：（"+hehp + " ）魔力:（" + hemp + "）防禦力：（"+hedef +"）攻擊力：（" + heatk+"）";
+  
+  
+  //我方精靈資料
+
+  var uselement = document.getElementById("usdata");
+  
+  var ushp = hero[mo_me].hp[0];
+  var usmp=  hero[mo_me].mp[0];
+  var usdef =  hero[mo_me].def[0];
+  var usatk =  hero[mo_me].atk[0];
+  
+  uselement.textContent = "血量：（"+ushp + " ）魔力:（" + usmp + "）防禦力：（"+usdef +"）攻擊力：（" + usatk+"）";
+  
+  
+
+///技能代號 1
+
+end = false;
+
+
+
+
+
+function the1_1() {
+
+    if (currentHP > 0 && theusmp >= 100 && end === false) {
+        dmg = hero[mo_me].atk[1] + hero[mo_he].def[1]; 
+        currentHP -= dmg
+        theusmp -= 10;
+        console.log("<hr>敵方受到"+dmg+"傷害，血量剩餘"+currentHP)
+      
+        if (theusmp < 10){
+              }
+        
+        if (currentHP <= 0) {
+            currentHP = 0;
+            console.log("<hr>我方獲勝")
+            end = true;
+        }
+        hehpnow();
+        usmpnow();
+
+    }
+  }
+
+
+function the1_2() {
+
+    if (currentHP > 0 && theusmp >= 100 && end === false) {
+        hero[mo_me].atk[1] = hero[mo_me].atk[1]*2 + hero[mo_he].def[1];
+        theusmp -= 10;
+        console.log("<hr>我方提升攻擊力"+hero[mo_me].atk[0]+"至"+hero[mo_me].atk[1]+"攻擊力")
+      
+        if (theusmp < 10){
+              }
+        
+        if (currentHP <= 0) {
+            currentHP = 0;
+            console.log("<hr>我方獲勝")
+            end = true;
+        }
+        hehpnow();
+        usmpnow();
+
+    }
+  }
+
+  var the1_3pp = 1;
+
+  function the1_3() {
+
+    if (currentHP > 0 && theusmp >= 100 && end === false && the1_3pp >= 0 ) {
+        dmg =  hero[mo_me].atk[1]*3 - hero[mo_he].def[1];
+        currentHP -= dmg;
+        the1_3pp -= 1;
+        theusmp -= 10;
+        console.log("<hr>敵方受到"+dmg+"傷害，血量剩餘"+currentHP)
+
+        if(theusmp < 100){
+            console.log("魔力值"+theusmp+"不足發動技能");
+            dragon_fire.disabled = true;
+        }
+      
+        if (the1_3pp === 0){
+            console.log(" 龍爆pp 剩餘"+the1_3pp+" 之後無法使用技能<br>")
+            dragon_fire.disabled = true;
+              }
+        
+        if (currentHP <= 0) {
+            currentHP = 0;
+            console.log("<hr>我方獲勝")
+            end = true;
+        }
+        hehpnow();
+        usmpnow();
+
+    }
+  }
+
+
+  function the2_1 () {
+   if (playerHP > 0 && thehemp >= 10 && end === false ){
+    dmg = hero[mo_he].atk[1]*2;
+    playerHP -= dmg;
+    thehemp -= 10;
+    console.log("我方受到"+dmg+"傷害，血量剩餘"+playerHP)
+
+    if (thehemp < 10){
+
+    }
+
+    if (playerHP <= 0) {
+        playerHP = 0;
+     console.log("<hr>敵方獲勝")
+     end = true;
+    }
+
+    hempnow()
+    ushpnow();
+}
+}
+
+
+function the2_2 () {
+    if (playerHP > 0 && thehemp >= 10 && end === false ){
+     weakit = hero[mo_me].def[1] - 50; 
+     thehemp -= 10;
+     console.log("我方受到弱化"+50+"防禦力，防禦力轉為"+weakit)
+ 
+     if (thehemp < 10){
+ 
+     }
+ 
+     if (playerHP <= 0) {
+         playerHP = 0;
+      console.log("<hr>敵方獲勝")
+      end = true;
+     }
+ 
+     hempnow();
+     ushpnow();
+ }
+ }
+
+
+function turn() {
+if (theusmp <= 0) {
+    theusmp += 30;
+} else if (theusmp > hero[mo_me].mp[0]) {
+    theusmp = hero[mo_me].mp[0];
+}
+
+if (thehemp <= 0) {
+   thehemp += 30;
+} else if (thehemp > hero[mo_he].mp[0]) {
+    thehemp = hero[mo_he].mp[0];
+}
+hempnow()
+usmpnow()
+};
+
+
+
+var theturn = 1;
+
+
+function heturn() {
+  if (theturn === 1) {
+    the2_2();
+  }
+  if (theturn > 1) {
+    the2_1();
+  }
+}
+
+
+
+               
+
+
+document.getElementById("fireball").addEventListener("click", function () {
+  the1_1();
+  heturn();
+  turn();
+  theturn += 1;
+});
+
+
+
+document.getElementById("theboom").addEventListener("click", function(){
+    the1_2();
+    heturn();
+    turn();
+    theturn += 1;
+    })
+
+
+
+document.getElementById("dragon_fire").addEventListener("click", function(){
+    the1_3();
+    heturn();
+    turn();
+    theturn += 1;
+    })
+
+
+
+    })
+
+    
+  </script>
+
+
+  </head>
+
+<br>
+
+<body>
+
+   <div class= "wid" align= "center">
+
+
+
+
+<br>
+
+<div class="monster">
+ <img src="https://images.nightcafe.studio/jobs/wP2it8zfFEzvWLS2XEtL/wP2it8zfFEzvWLS2XEtL--1--guasl.jpg?tr=w-640,c-at_max" class ="img" width="450" height="450"></a>
+
+  <div class="blood"><span id="currentHP">？</span></div>
+  <div class="monstermp" id="hempz">?</div>
+
+</div>
+
+
+<br>
+<div class = "about" id ="hedata">
+
+
+</div >
+
+   </div>
+
+
+<div class="data">
+<br>
+<div class="about" id ="usdata">
+
+</div>
+      <div class="summary" id ="gamemain">
+       
+    
+ <button class ="myhero" id="changehero"> 
+  <img class = "img" src="https://images.nightcafe.studio/jobs/1r0i4ELN2KQdDz9TLxHD/1r0i4ELN2KQdDz9TLxHD--1--ldxws.jpg?tr=w-640,c-at_max" width="100" height="100"></img></button>
+
+  <br><br><br>  
+
+<div id = "skill"> 
+     <button id="fireball">爆烈火球</button>
+     <button id="theboom">爆氣</button>
+     <button id="dragon_fire">龍爆</button>
+
+</div>
+
+
+
+      </div>
+
+  <div class="HP"><span id="playerHP">？</span></div>
+
+  <div class="MP" id="usmpz">?</div>
+
+  <div id="log" class="scrollen"></div>
+
+
+</div>
+</div>
+
+
+
+</body>
+
+
+</html>
