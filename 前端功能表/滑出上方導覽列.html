@@ -1,31 +1,118 @@
- <body>
+
+<style>
+
+
+
+*{
+ border: #804747 solid 1px}
+
+
+
+
+.logo{
+
     
-    <!-->可見導覽列未點擊元素<!-->
+         display: inline-block;
+         width: 30px;
+         height: 30px;
+          background-color:rgb(253, 253, 253);
+          border: 10px solid gray;
+          color: white;            
+          border-radius: 5px;
+        }
     
-    <input type="checkbox" id="hamCheck" class="menuCheck" style="display:none;">
+       
+        /*排版導覽列*/
+        nav{
+            display: flex;
+            }
+        
     
-   <!-->導覽列點擊後顯示<!-->
-      <nav class="menuList" >
-      <a href="#">首頁</a>
-      <a href="#">追蹤</a>
-      <a href="#">訂閱</a>
-      <a href="#">任務</a>
-      <a href="#">作品</a>
-      <a href="#">論壇</a>
-      <a href="#">遊戲</a>
-      <button>htgsfd</button>
-    
-    </nav>
-<!--> 雕刻出圖形元素 <!-->
-    
-    <label for="hamCheck" class="hamBtn">   
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    
-    
-    </label>
-    
+        
+            .hamBtn:hover{
+              cursor:pointer;
+            }
+        
+            /*導覽列跳出動畫*/
+
+            .menuCheck:checked ~ .menuList{
+              left:65px;
+              transition:.50s; 
+              width:100%;
+            }
+
+            /*導覽列設定*/
+
+            .menuList{
+              transition:.50s;
+              background-color:#804747;
+              position:fixed;
+              color: white;
+              left:100%;
+              height: 50px;
+              text-decoration: none;
+        
+                }
+
+            /*主菜單內元素連結「格化」*/
+
+            .menuList a{
+              display:block;
+            }
+            .menuList a:hover{
+              cursor:default;
+            }
+
+            /*點擊連結元素外觀編輯*/
+            
+            a,a:link,a:visited
+            {   color:#f9f8f7;
+                text-decoration: none;
+                padding: 15px;
+            }
+            
+        a:hover{
+            color:#fbfbf6;
+            background-color: #997878;
+            text-decoration: none;}
+        
+        /* 主導覽*/
+          
     
 
-    </body>  
+    
+    
+</style>
+
+
+<body>
+    
+    <!--可見導覽列未點擊元素<!-->
+
+<nav class="grid_container">
+  <label for="hamCheck" class="hamBtn"> 
+    <span class="logo"></span>
+    </label>
+    
+    <div id="modify"></div>
+    <input type="checkbox" id="hamCheck" class="menuCheck" style="display:none;">
+    <nav class="menuList" >
+    <a href="#">首頁</a>
+    <a href="#">追蹤</a>
+    <a href="#">訂閱</a>
+    <a href="#">收藏</a>
+    <a href="#">任務</a>
+    <a href="#">作品</a>
+    <a href="#">論壇</a>
+    <a href="#">遊戲</a>
+    </nav>
+
+<page>
+
+
+    <left_zone>
+
+</left_zone>
+
+
+</page>
