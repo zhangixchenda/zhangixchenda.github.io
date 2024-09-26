@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Quiz</title>
+</head>
+<body>
+
+    <h1>English Grammar Quiz</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <button id="submit">Submit Answer</button>
+    <div id="result"></div>
+    <button id="next" style="display: none;">Next Question</button>
+
+    <script>
+        // 文法題目資料
+        const grammarQuestions = [
+            {
+                question: "Choose the correct verb form:",
+                sentence: "She ____ to school every day.",
+                options: ["go", "goes", "gone", "going"],
+                answer: "goes"
+            },
+            {
+                question: "Choose the correct article:",
+                sentence: "He bought ____ apple from the market.",
+                options: ["a", "an", "the", "no article"],
+                answer: "an"
+            },
+            {
+                question: "Choose the correct tense:",
+                sentence: "They ____ a movie last night.",
+                options: ["watched", "watch", "watching", "watches"],
+                answer: "watched"
+            },
+            {
+                question: "Choose the correct preposition:",
+                sentence: "She will arrive ____ 5 PM.",
+                options: ["at", "in", "on", "by"],
+                answer: "at"
+            },
+        ];
+
+        let currentQuestion = {};
+        let selectedAnswer = "";
+
+        // 隨機生成一個題目
+        function generateQuestion() {
+            document.getElementById("result").textContent = "";
+            document.getElementById("next").style.display = "none";
+
+            /* 隨機題目*/
+
+            currentQuestion = grammarQuestions[Math.floor(Math.random() * grammarQuestions.length)];
+            
+            /* 問題元素（ 問題＆ 填選處 ） */
+            document.getElementById("question").textContent = currentQuestion.question;
+            document.getElementById("options").innerHTML = "";
+
+            /* 創建「新題目文件元素」*/
+            const sentenceElement = document.createElement("p");
+            
+            /* 將文章元素，將「隨機題目內容」給予「新題目文件元素」 */
+
+            sentenceElement.textContent = currentQuestion.sentence;
+
+            /* 將題目選單，連結上「新題目文件元素」*/
+            document.getElementById("options").appendChild(sentenceElement);
+
+
+            /* 指定「選單（option）資料檔」之「內容」*/
+            currentQuestion.options.forEach((option, index) => {
+               
+               /*設定創建選單元素*/
+                const optionElement = document.createElement("input");
+              
+            /*元素屬性*/
+                optionElement.type = "radio";
+                optionElement.name = "answer";
+                optionElement.value = option;
+
+            /* 為每一個元素索引值，成立檔案名稱 */
+                optionElement.id = `option${index}`;
+                
+            /* 成立一個「點選檔」 */
+                const label = document.createElement("label");
+            
+            /* 添加點選檔for屬性，和資料檔元素索引{ 全部內容 } */
+                label.setAttribute("for", `option${index}`);
+                label.textContent = option;
+
+            /*成立資料檔*/
+                const lineBreak = document.createElement("br");
+
+            /*將「選單資料檔」載入「選單元素檔」*/
+
+                document.getElementById("options").appendChild(optionElement);
+                document.getElementById("options").appendChild(label);
+                document.getElementById("options").appendChild(lineBreak);
+            });
+        }
+
+        // 檢查答案
+        document.getElementById("submit").addEventListener("click", function() {
+
+        /*選取所有是「name = answer」元素*/
+            const radios = document.getElementsByName("answer");
+            selectedAnswer = "";
+
+        /* 針對「type」是「radio 可選檔」元素者，傳入所有是「answer」名別檔的參數「radios」 */
+            for (const radio of radios) {
+                if (radio.checked) {
+                    selectedAnswer = radio.value;
+                    break;
+                }
+            }
+
+       /* 如果「選擇答案」參數，是空的 ＆ 答對，沒答對的話，顯示「字串」 */
+
+            if (selectedAnswer === "") {
+                document.getElementById("result").textContent = "Please select an answer!";
+            } else if (selectedAnswer === currentQuestion.answer) {
+                document.getElementById("result").textContent = "Correct!";
+                document.getElementById("next").style.display = "inline";
+            } else {
+                document.getElementById("result").textContent = `Incorrect! The correct answer is: ${currentQuestion.answer}`;
+                document.getElementById("next").style.display = "inline";
+            }
+        });
+
+        // 下一個問題
+        document.getElementById("next").addEventListener("click", function() {
+            generateQuestion();
+        });
+
+        // 運行此程式
+        generateQuestion();
+    </script>
+
+</body>
+</html>
