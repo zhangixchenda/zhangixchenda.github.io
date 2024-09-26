@@ -109,7 +109,7 @@
             const radios = document.getElementsByName("answer");
             selectedAnswer = "";
 
-        /* 針對「type」是「radio 可選檔」元素者，傳入所有是「answer」名別檔的參數「radios」 */
+        /*     針對「type」是「radio 可選檔」元素者，傳入所有是「answer」名別檔的資料性參數檔「radios」 */
             for (const radio of radios) {
                 if (radio.checked) {
                     selectedAnswer = radio.value;
