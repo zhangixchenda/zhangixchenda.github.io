@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易論壇</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .reply {
+            margin-left: 20px;
+            background-color: #f9f9f9;
+            padding: 5px;
+        }
+
+        .reply-btn {
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .post-form, .reply-form {
+            margin-bottom: 20px;
+        }
+
+        .post-form input, .reply-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .post-form textarea, .reply-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <h1>論壇帖子區</h1>
+
+    <!-- 發佈新帖子 -->
+    <div class="post-form">
+        <h2>發佈新帖子</h2>
+        <input type="text" id="postTitle" placeholder="輸入帖子標題">
+        <textarea id="postContent" placeholder="輸入帖子內容"></textarea>
+        <button onclick="addPost()">發佈帖子</button>
+    </div>
+
+    <!-- 帖子顯示區 -->
+    <div id="postList">
+        <!-- 帖子會動態添加到這裡 -->
+    </div>
+
+    <script>
+        // 帖子數據存儲 (模擬資料庫)
+        let posts = [];
+
+        // 發佈帖子
+        function addPost() {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            
+            if (title && content) {
+
+                const post = {
+                
+            /* 「辨別貼文」成立[id]資料，等同於posts資料檔的「先後順序數量」 */ 
+                    id: posts.length + 1,
+
+            /* 帖子標題與留言內容 */
+
+                    title: title,
+                    content: content,
+
+            /* 「回覆」，設定資料空集，使之後填入 */
+                    replies: []
+                };
+
+            /* posts帖子儲存資料檔，加入post資料檔「上者」 */
+                posts.push(post);
+
+            /*更新＆清空 帖子發文處*/
+
+                renderPosts();
+                clearForm();
+            } 
+            
+            /*沒有填寫「標題與帖子內容」，跳出下者字串*/
+            
+            else {
+                alert('標題和內容還沒有寫好喔！');
+            }
+        }
+
+        // 顯示帖子列表
+        function renderPosts() {
+
+            /* 成立帖子列表元素 */
+
+            const postList = document.getElementById('postList');
+            postList.innerHTML = ''; // 清空列表
+
+            /* 指定「帖子資料檔」個體貼文 */
+            posts.forEach(post => {
+
+            /* 新增貼文元素 ＆ 元素「class風格」*/
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+
+            /* 「新增貼文元素」輸入標題與貼文內容，與讚文元素」*/
+                postElement.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                    <div id="replies-${post.id}">
+                        ${post.replies.map(reply => `<div class="reply">${reply}</div>`).join('')}
+                    </div>
+                    <div class="reply-form">
+                        <input type="text" id="reply-${post.id}" placeholder="輸入回覆">
+                        <button class="reply-btn" onclick="addReply(${post.id})">回覆</button>
+                    </div>
+                `;
+            /* 文章帖子列表填入「新增貼文元素」 */
+                postList.appendChild(postElement);
+            });
+        }
+
+        // 添加回覆
+        function addReply(postId) {
+            
+            /* 「確認讚文」是在哪個貼文*/
+            const replyInput = document.getElementById(`reply-${postId}`);
+         
+            /* 在該「確認讚文」輸入貼文*/
+            const replyText = replyInput.value;
+
+            /* (貼文程式）*/
+
+            if (replyText) {
+        /* 在[posts]尋找其（「所有」寫成p）的「posts」找到存在的貼文id參數*/
+                const post = posts.find(p => p.id === postId);
+
+        /* 選取「貼文元素」的「讚文」加入「讚文文件」，*/
+                post.replies.push(replyText);
+
+        /*  更新「發表帖子處」。 */
+                renderPosts(); // 重新渲染帖子
+            } else {
+                alert('請輸入回覆內容');
+            }
+        }
+
+        // 清空「帖子發表處」
+        function clearForm() {
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+        }
+    </script>
+</body>
+</html>
