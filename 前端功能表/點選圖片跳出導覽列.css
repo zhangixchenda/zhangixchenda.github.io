@@ -1,0 +1,108 @@
+
+        /* 導覽列 */
+        .logo{
+        
+            position: fixed;
+                 display: inline-block;
+                 width: 30px;
+                 height: 30px;
+                  background-color:rgb(253, 253, 253);
+                  border: 10px solid gray;
+                  color: white;            
+                  margin-left: 1px;
+                  border-radius: 5px;
+    
+                }
+            
+                /*排版導覽列*/
+                nav{
+                    display: flex;
+                    }
+                
+            
+                
+                    .hamBtn:hover{
+                      cursor:pointer;
+                    }
+                
+                    /*導覽列跳出動畫*/
+        
+                    .menuCheck:checked ~ .menuList{
+                      left:65px;
+                      width:100%;
+
+                    }
+        
+                    /*導覽列設定*/
+        
+                    .menuList{
+                      display: flex;
+                      background-color:#804747;
+                      position:fixed;
+                      color: white;
+                      left:100%;
+                      height: 50px;
+                      text-decoration: none;
+                
+                        }
+        
+                    /*主菜單內元素連結「格化」*/
+        
+                    .menuList a{
+                      display:block;
+                    }
+                    .menuList a:hover{
+                      cursor:default;
+                    }
+        
+                    /*點擊連結元素外觀編輯*/
+                    
+                    .menuList a:link,a:visited
+                    {   color:#fbfbfa;
+                        text-decoration: none;
+                        padding: 15px;
+                    }
+                    
+                .menuList a:hover{
+                    color:#f1f0f0;
+                    background-color: #7c2c2c;
+                    text-decoration: none;}
+
+                    .search_zone{
+                      margin-left: 5%;
+                                  width: 300px;}
+                                          
+                
+/* ｈｔｍｌm 元素 
+                
+                        <nav>
+      <label for="hamCheck" class="hamBtn"> 
+      <span class="logo"></span>
+      </label>
+ 
+      <div id="modify"></div>
+      <input type="checkbox" id="hamCheck" class="menuCheck" style="display:none;">
+      <div class="menuList" >
+      <a href="#">首頁</a>
+      <a href="#">追蹤</a>
+      <a href="#">訂閱</a>
+      <a href="#">收藏</a>
+      <a href="#">任務</a>
+      <a href="#">作品</a>
+      <a href="#">論壇</a>
+      <a href="#">遊戲</a>
+      <a href="#">研究</a>
+      <a href="#">新聞</a>
+      <a href="#">字典</a>
+      <a href="#">藝術</a>
+      <a href="#">工程</a>
+      <a href="#">心理</a>
+
+      <input type="text" name="q" id="q" placeholder=" 請輸入搜索關鍵字 "
+      class="search_zone" required="required" minlength="2" maxlength="50" pattern=".{2,50}" oninvalid="setCustomValidity('Muss zwischen 2 und 50 sein')" onblur="" autocomplete="off">
+</div>
+
+    </nav>
+    
+    */
+
